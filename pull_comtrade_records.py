@@ -2,6 +2,8 @@ import pandas as pd
 import comtradeapicall
 from config.config_reader import read_config
 
+print('Pulling COMTRADE records...')
+
 # Settings
 config = read_config()
 
@@ -14,7 +16,7 @@ for c in countries_iso_numeric.iterrows():
     iso_code = c[1]['M49 code']
     iso_acr = c[1]['ISO-alpha3 code']
 
-    print('Processing: ' + iso_acr + '(' + str(iso_code) + ')')
+    print('Processing: ' + iso_acr + ' (' + str(iso_code) + ')')
 
     comtradeapicall.bulkDownloadFinalFile(
         config.subscription_key,
