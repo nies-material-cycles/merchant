@@ -44,7 +44,7 @@ for f in files:
 
 print('Joined store contains ' + '{:,.0f}'.format(store.shape[0]) + ' records.')
 
-store.to_csv(config.work_dir + 'comtrade-joined-records' + str(config.year) + '.csv')
+store.to_csv(config.work_dir + 'comtrade-joined-records-' + str(config.year) + '.csv')
 
 print('Finished.')
 
