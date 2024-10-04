@@ -19,7 +19,7 @@ assert os.path.isdir(save_dir)
 countries_iso_numeric = pd.read_excel(config.data_dir + '/countries-iso-numeric-m49-conc.xlsx');
 country_iso = countries_iso_numeric['M49 code'].to_list()
 
-store = []
+store = pd.DataFrame()
 for c in countries_iso_numeric.iterrows():
 
     # Meta
@@ -64,9 +64,7 @@ for c in countries_iso_numeric.iterrows():
                     
                 # Append
                 if df.shape[0] > 0:
-                    store.extend(df.to_dict(orient='records'))
-
-store = pd.DataFrame(store)
+                    store = pd.concat([store, df], ignore_index=True)
 
 print('Joined store contains ' + '{:,.0f}'.format(store.shape[0]) + ' records.')
 
