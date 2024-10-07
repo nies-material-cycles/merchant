@@ -19,15 +19,16 @@ assert os.path.isdir(save_dir)
 countries_iso_numeric = pd.read_excel(config.data_dir + '/countries-iso-numeric-m49-conc.xlsx');
 country_iso = countries_iso_numeric['M49 code'].to_list()
 
-store = pd.DataFrame()
-for c in countries_iso_numeric.iterrows():
+store = []
+m = countries_iso_numeric.shape[0]
+for i, c in enumerate(countries_iso_numeric.iterrows()):
 
     # Meta
     iso_code = c[1]['M49 code']
     iso_acr = c[1]['ISO-alpha3 code']
     save_dir_c = save_dir + iso_acr + '/'
     
-    print('Processing: ' + iso_acr + ' (' + str(iso_code) + ')')
+    print(' (' + str(i) + '/' + str(m) + ') ' + iso_acr + ' (' + str(iso_code) + ')')
 
     if os.path.isdir(save_dir_c):
 
@@ -64,11 +65,15 @@ for c in countries_iso_numeric.iterrows():
                     
                 # Append
                 if df.shape[0] > 0:
-                    store = pd.concat([store, df], ignore_index=True)
+                    store.append(df)
 
-print('Joined store contains ' + '{:,.0f}'.format(store.shape[0]) + ' records.')
+print('Joining records...')
 
-store.to_csv(save_dir + 'comtrade-joined-records-' + str(config.year) + '.csv')
+all_store = pd.concat(store, ignore_index=True)
+
+print('Complete store contains ' + '{:,.0f}'.format(all_store.shape[0]) + ' records.')
+
+all_store.to_csv(save_dir + 'comtrade-joined-records-' + str(config.year) + '.csv')
 
 print('Finished.')
 
