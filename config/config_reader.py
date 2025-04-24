@@ -24,12 +24,12 @@ def read_config():
         config = json.load(json_file)
 
     # Manage directories
-    assert os.path.isdir(os.environ['WORK_DIR'])
-    assert os.path.isdir(os.environ['DATA_DIR'])
+    assert os.path.isdir(config['env']['work_dir'])
+    assert os.path.isdir(config['env']['data_dir'])
 
     # Unpack
-    config_obj = Bunch(work_dir=os.environ['WORK_DIR'],
-                       data_dir=os.environ['DATA_DIR'],
+    config_obj = Bunch(work_dir=config['env']['work_dir'],
+                       data_dir=config['env']['data_dir'],
                        settings=config,
                        now_str=datetime.datetime.now().strftime('%Y-%m-%d'),
                        subscription_key=config["subscription_key"],
