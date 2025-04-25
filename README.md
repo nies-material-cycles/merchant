@@ -83,7 +83,8 @@ where `WORK_DIR` specifies an output directory and `DATA_DIR` a directory contai
 | 41      | ce/el        | Number of cells/elements                         |
 
 ## Legacy format
-mock_legacy_format
+To structure the joined data files in the legacy format, set `mock_legacy_format=true` in the config file.
+
 ```
 'Classification',
 'Year',
@@ -109,4 +110,4 @@ mock_legacy_format
 'Flag'
 ```
 
-Mocked fields: 'Aggregate Level', 'Is Leaf Code'
+Note the following fields are mocked: `Aggregate Level`, `Is Leaf Code`, `Flag`.

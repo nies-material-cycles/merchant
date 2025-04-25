@@ -86,6 +86,8 @@ all_store.to_csv(save_dir + 'comtrade-joined-records-' + str(config.year) + '.cs
 
 if config.settings['mock_legacy_format']:
 
+    print('Applying legacy format...')
+
     all_store = all_store.rename(columns={"classificationCode": "Classification",
                                           "refYear": "Year",
                                           "period": "Period",
