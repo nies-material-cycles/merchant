@@ -5,6 +5,8 @@ from config.config_reader import read_config
 from lib.methods import pull_records, join_records
 from lib.formatter import apply_legacy_formatting
 
+print('Running Comtrade batch processor...')
+
 # Settings
 config = read_config()
 
@@ -24,6 +26,8 @@ if not os.path.isdir(save_dir):
 
 # Request each year in timeseries
 for t in timeseries:
+
+    print(' .' + str(t))
 
     # Scraped data write path
     work_dir = config.work_dir + str(t) + '/'
