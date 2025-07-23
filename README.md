@@ -1,6 +1,17 @@
 # Merchant
 Scrapes data from the Comtrade API gently, avoids hitting the 2.5 million row per request limit
 
+## Methods
+ `pull_comtrade_records`
+ Pulls Comtrade records for a single year by country from the Comtrade API.
+
+`join_comtrade_records`
+ Joins each country's records into a single file for a single year.
+
+ `batch_processor`
+ Pulls and joins records for all years in a specified timeseries, i.e. in the config file `timeseries=[2020, 2021]`.
+
+
 ## Setup
 ### Config
 Define a `config.json` file in `/config/` directory.
@@ -83,7 +94,7 @@ where `WORK_DIR` specifies an output directory and `DATA_DIR` a directory contai
 | 41      | ce/el        | Number of cells/elements                         |
 
 ## Legacy format
-To structure the joined data files in the legacy format, set `mock_legacy_format=true` in the config file.
+To structure the joined data files in the legacy format, set `mock_legacy_format=1` in the config file.
 
 ```
 'Classification',
