@@ -19,7 +19,11 @@ def apply_legacy_formatting(all_store, country_legend=None, year=None, data_dir=
                                           "qtyUnitCode": "Qty Unit Code",
                                           "netWgt": "Netweight (kg)",
                                           "primaryValue": 'Trade Value (US$)'})
-    
+
+    # Rename legend columns
+    country_legend = country_legend.rename(columns={'M49 code': "m49_code", 
+                                                "ISO-alpha3 code": "iso_alpha3",
+                                                'Country or Area': 'name'})
 
     # Missing columns
     all_store['Period Desc.'] = all_store['Period']
@@ -34,7 +38,9 @@ def apply_legacy_formatting(all_store, country_legend=None, year=None, data_dir=
     all_store['Trade Flow'] = all_store['flowCode'].map(di).fillna(value='Other')
     
     # Country codes
-    c_idx_acr_map = pd.Series(country_legend.iso_alpha3.values,index=country_legend.m49_code.astype(str)).to_dict()
+    c_codes = country_legend['iso_alpha3'].values
+    c_idx_acr_map = pd.Series(c_codes,index=country_legend.m49_code.astype(str)).to_dict()
+
     all_store['Reporter ISO'] = all_store['Reporter Code'].map(c_idx_acr_map).fillna(value='WLD')
     all_store['Partner ISO'] = all_store['Partner Code'].map(c_idx_acr_map).fillna(value='WLD') 
 
