@@ -50,3 +50,5 @@ for t in timeseries:
     # Legacy formatting
     if config.settings['mock_legacy_format']:
         apply_legacy_formatting(all_store, country_legend=country_legend, year=t, data_dir=config.data_dir, save_dir=save_dir)
+
+print('Finished batch processing ' + str(len(timeseries)) + ' years.')
